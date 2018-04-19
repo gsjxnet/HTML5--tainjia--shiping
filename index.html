@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<meta charset="UTF-8">
+<title>PLAYPOD</title>
+<meta name='robots' content='noindex,follow' />
+<script type='text/javascript' src='js/jquery.js'></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<style type="text/css">
+	.kj{
+		width: 100%; height: auto;position: relative;
+	}
+	.play-video{
+		width: 100px;height: 100px; position: absolute;z-index: 3;
+	}
+	.play-video img{
+		width: 100%;height: auto;
+	}
+	.video-main{
+		width: 100%; height: auto;position: absolute;z-index: 1;
+	}
+</style>
+</head>
+<body>
+<div class="kj">
+	<div class="play-video"><img src="images/play.png" src=""></div>
+	<video poster="http://45.248.70.203/playpod/wp-content/uploads/2018/02/Playpod_FacebookEvent_CoverImage.png" id="media" class="video-main">
+		<source src="https://player.vimeo.com/external/252429016.hd.mp4?s=1fd0a7dabb3835af9b46f3d35dffad3ecd651ed5&profile_id=174" >;
+	</video>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+
+
+		$('.play-video').click(function() {
+			$(this).siblings('video').addClass('isplay');
+			$(this).css('display','none');
+			$(this).siblings('video').trigger('play');
+			$('.video-slider').slick('slickPause');
+		});
+
+        //播放过程中点击暂停
+		$('.video-main').click(function() {
+		$(this).toggleClass('isplay');
+		if($(this).hasClass('isplay')){
+			$(this).siblings('.play-video').css('display','none');
+			$(this).trigger('play');
+			$('.video-slider').slick('slickPause');
+		}
+		if(!$(this).hasClass('isplay')){
+			$(this).siblings('.play-video').css('display','block');
+			$(this).trigger('pause');
+			$('.video-slider').slick('slickPlay');
+		}
+	});
+	});
+</script>
+</body>
+</html>
